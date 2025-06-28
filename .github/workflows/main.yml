@@ -1,0 +1,20 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Test
+        run: mvn test
+      - name: Build
+        run: mvn package
+      - name: Deploy
+        run: kubectl apply -f deployment.yaml
+        run: kubectl apply -f service.yaml
