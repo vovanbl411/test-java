@@ -6,6 +6,8 @@ RUN mvn clean package
 
 FROM openjdk:17-jdk-alpine
 #ARG JAR_FILE=$(mvn help:evaluate -Dexpression=project.build.finalName -q -DforceStdout)
+
 #COPY --from=build /app/target/${JAR_FILE}.jar app.jar
+
 COPY --from=build /app/target/*.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
